@@ -1,7 +1,7 @@
 <template>
   <div class="header" @click="changeColor">
-    <div class="header-left"></div>
-    <div class="header-center">音乐</div>
+    <div class="header-left" @click.stop="back"></div>
+    <div class="header-center">{{title}}</div>
     <div class="header-rigth"></div>
   </div>
 </template>
@@ -22,6 +22,17 @@ export default {
       this.index++
       if (this.index > this.theme.length - 1) this.index = 0
       document.documentElement.setAttribute('data-theme', this.theme[this.index])
+    },
+    back () {
+      this.$router.go(-1)
+    }
+  },
+  props: {
+    title: {
+      type: String,
+      default: '',
+      require: true
+
     }
   }
 }

@@ -19,11 +19,11 @@ import 'swiper/dist/css/swiper.css'
 export default {
   name: 'Banner',
   updated () {
-    console.log(this.banners)
+
   },
   data: function () {
     return {
-      swiperOptions: {
+      swiperOption: {
         pagination: {
           el: '.swiper-pagination'
         }
@@ -46,6 +46,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+img{
+  width: 100%;
+}
 </style>

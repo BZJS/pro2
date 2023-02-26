@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-  <Header></Header>
+  <Header :title="'音乐'"></Header>
     <tab-bar></tab-bar>
     <router-view></router-view>
   </div>

@@ -1,15 +1,21 @@
 <template>
-  <div class="tabbar">
-    <router-link tag="div" class="taber-item" to="/recommend">推荐</router-link>
-    <router-link tag="div" class="taber-item" to="/singer">歌手</router-link>
-    <router-link tag="div" class="taber-item" to="/rank">排名</router-link>
-    <router-link tag="div" class="taber-item" to="/search">搜索</router-link>
-  </div>
+
+    <div class="tabbar">
+      <router-link tag="div" class="taber-item" to="/recommend">推荐</router-link>
+      <router-link tag="div" class="taber-item" to="/singer">歌手</router-link>
+      <router-link tag="div" class="taber-item" to="/rank">排名</router-link>
+      <router-link tag="div" class="taber-item" to="/search">搜索</router-link>
+    </div>
+
 </template>
 
 <script>
+
 export default {
-  name: 'TabBar'
+  name: 'TabBar',
+  components: {
+
+  }
 }
 </script>
 

@@ -6,6 +6,8 @@ const recommend = () => import('../views/Recommend.vue')
 const Rank = () => import('../views/Rank.vue')
 const Singer = () => import('../views/Singer.vue')
 const Search = () => import('../views/Search.vue')
+
+const Detail = () => import('../components/Recommend/Detail.vue')
 const routes = [
   {
     path: '/',
@@ -14,7 +16,14 @@ const routes = [
   },
   {
     path: '/recommend',
-    component: recommend
+    component: recommend,
+    children: [
+      {
+        path: 'detail/:id',
+        component: Detail
+      }
+    ]
+
   }, {
     path: '/rank',
     component: Rank
