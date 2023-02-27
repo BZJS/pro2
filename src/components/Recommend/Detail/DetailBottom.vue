@@ -1,6 +1,5 @@
 <template>
-  <div class="detail-bottom">
-   <iscroll-view>
+
      <ul>
        <li><img src="../../../assets/images/small_play_163@2x.png" alt="">播放全部</li>
        <li v-for="value in detailItem" :key="value.userId">
@@ -8,12 +7,11 @@
          <div class="second">{{value.al.name}} - {{value.ar[0].name}}</div>
        </li>
      </ul>
-   </iscroll-view>
-  </div>
+
 </template>
 
 <script>
-import iscrollView from '@/components/iscrollView.vue'
+
 export default {
   name: 'DetailBottom',
   props: {
@@ -24,14 +22,15 @@ export default {
     }
   },
   components: {
-    iscrollView
+
   }
 }
 </script>
 
 <style scoped lang="scss">
   ul{
-
+    background-color: #fff;
+    width: 100%;
     li:nth-child(1){
       img{
         width: 40px;
@@ -51,12 +50,5 @@ export default {
       }
          }
   }
-  .detail-bottom{
-    position: fixed;
-    top: 560px;
-    left: 0;
-    right: 0;
-    bottom: 0;
 
-  }
 </style>

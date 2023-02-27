@@ -5,13 +5,15 @@
 </template>
 
 <script>
-import IScroll from 'iscroll'
+import IScroll from 'iscroll/build/iscroll-probe'
 export default {
   name: 'iscrollView',
   mounted () {
     this.myScroll = new IScroll(this.$refs.wrapper, {
       mouseWheel: true,
       scrollbars: false,
+      probeType: 3,
+      // 解决拖拽卡顿问题
       scrollX: false,
       scrollY: true,
       disablePointer: true,
@@ -20,7 +22,7 @@ export default {
 
     })
     const observer = new MutationObserver((mutations, observer) => {
-      this.myScroll.refresh()
+      this.refresh()
     })
     const config = {
       childList: true, // 观察目标子节点的变化，添加或者删除
@@ -28,16 +30,26 @@ export default {
       attributeFilter: ['height', 'offsetHeight'] // 观察特定属性
     }
     observer.observe(this.$refs.wrapper, config)
-    setTimeout(() => {
-      this.myScroll.refresh()
-    }, 5000)
   },
   data: function () {
     return {
       myScroll: null
+
     }
   },
   methods: {
+    scrolling (fn) {
+      this.myScroll.on('scroll', function () {
+        fn(this.y)
+      })
+      // this.refresh()
+    },
+
+    refresh () {
+      setTimeout(() => {
+        this.myScroll.refresh()
+      }, 100)
+    }
 
   }
 
@@ -48,7 +60,7 @@ export default {
 #wrapper{
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  //overflow: hidden;
 
 }
 </style>

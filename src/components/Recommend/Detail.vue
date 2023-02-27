@@ -2,8 +2,12 @@
 <!--  手动划拉上去跟图片的放大缩小，且之后的切换效果-->
   <div class="detail">
   <Header :title="detailList.name"></Header>
-    <detail-center :img-url="detailList.coverImgUrl"></detail-center>
-    <detail-bottom :detail-item="detailList.tracks"></detail-bottom>
+    <detail-center ref="top" :img-url="detailList.coverImgUrl"></detail-center>
+    <div class="bottom">
+      <iscroll-view ref="scrollView">
+        <detail-bottom :detailItem="detailList.tracks"></detail-bottom>
+      </iscroll-view>
+    </div>
   </div>
 </template>
 
@@ -12,6 +16,7 @@
 import Header from '../Header.vue'
 import DetailCenter from '@/components/Recommend/Detail/DetailCenter.vue'
 import DetailBottom from '@/components/Recommend/Detail/DetailBottom.vue'
+import iscrollView from '@/components/iscrollView.vue'
 
 import { getDetail } from '@/api'
 
@@ -27,6 +32,7 @@ export default {
   components: {
     Header,
     DetailCenter,
+    iscrollView,
     DetailBottom
 
   },
@@ -34,6 +40,18 @@ export default {
     return {
       detailList: {}
     }
+  },
+  mounted () {
+    const defaultHeight = this.$refs.top.$el.offsetHeight
+    this.$refs.scrollView.scrolling((offsetY) => {
+      if (offsetY < 0) {
+        const scale = Math.abs(offsetY) / defaultHeight
+        this.$refs.top.changeMask(scale)
+      } else {
+        const scale = 1 + offsetY / defaultHeight
+        this.$refs.top.$el.style.transform = `scale(${scale})`
+      }
+    })
   }
 
 }
@@ -48,5 +66,12 @@ export default {
   bottom: 0;
   background-color: #fff;
   z-index: 999;
+}
+.bottom{
+  position: fixed;
+  top: 500px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 </style>
