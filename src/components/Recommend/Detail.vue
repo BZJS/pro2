@@ -18,16 +18,27 @@ import DetailCenter from '@/components/Recommend/Detail/DetailCenter.vue'
 import DetailBottom from '@/components/Recommend/Detail/DetailBottom.vue'
 import iscrollView from '@/components/iscrollView.vue'
 
-import { getDetail } from '@/api'
+import { getDetail, getALnum } from '@/api'
 
 export default {
   name: 'Detail',
   created () {
-    getDetail({ id: this.$route.params.id }).then((data) => {
-      this.detailList = data.playlist
-    }).catch((error) => {
-      console.log(error)
-    })
+    if (this.$route.params.type === 'personalized') {
+      getDetail({ id: this.$route.params.id }).then((data) => {
+        this.detailList = data.playlist
+      }).catch((error) => {
+        console.log(error)
+      })
+    } else if (this.$route.params.type === 'alnum') {
+      getALnum({ id: this.$route.params.id }).then((data) => {
+        this.detailList = {
+        // 统一格式
+          name: data.album.name,
+          coverImgUrl: data.album.picUrl,
+          tracks: data.songs
+        }
+      })
+    }
   },
   components: {
     Header,

@@ -22,7 +22,7 @@ export default {
 
     })
     const observer = new MutationObserver((mutations, observer) => {
-      this.refresh()
+      this.myScroll.refresh()
     })
     const config = {
       childList: true, // 观察目标子节点的变化，添加或者删除
@@ -30,6 +30,9 @@ export default {
       attributeFilter: ['height', 'offsetHeight'] // 观察特定属性
     }
     observer.observe(this.$refs.wrapper, config)
+    setTimeout(() => {
+      this.myScroll.refresh()
+    }, 5000)
   },
   data: function () {
     return {
@@ -43,12 +46,6 @@ export default {
         fn(this.y)
       })
       // this.refresh()
-    },
-
-    refresh () {
-      setTimeout(() => {
-        this.myScroll.refresh()
-      }, 100)
     }
 
   }

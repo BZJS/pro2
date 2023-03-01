@@ -8,3 +8,6 @@ export const getNewAlNum = () => network.get('/album/newest?limit=6')
 export const getNewSong = () => network.get('/personalized/newsong')
 
 export const getDetail = (data) => network.get('/playlist/detail', data)
+
+// 最新专辑
+export const getALnum = (data) => network.get('album', data)

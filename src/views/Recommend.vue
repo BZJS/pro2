@@ -4,13 +4,15 @@
     <div>
       <Banner :banners="banners"></Banner>
 
-      <personalized :personalized="personalized" :title="'推荐歌单'" @select="getMusicItem" ></personalized>
-      <personalized :personalized="newAlNum" :title="'最新专辑'"></personalized>
-      <personalized :personalized="newAlNum" :title="'最新专辑'"></personalized>
+      <personalized :personalized="personalized" :title="'推荐歌单'" @select="getMusicItem" :type="'personalized'"></personalized>
+      <personalized :personalized="newAlNum" :title="'最新专辑'" @select="getMusicItem" :type="'alnum'"></personalized>
+
       <new-song :newSongs="newSongs"></new-song>
     </div>
   </iscroll-view>
-  <router-view></router-view>
+ <transition>
+   <router-view></router-view>
+ </transition>
 
 </div>
 </template>
@@ -67,8 +69,8 @@ export default {
   methods: {
     // 没必要，可以直接在子组件中各自的item的click上自己跳，这里push除了复习一下子组件从父组件调用方法没啥了
 
-    getMusicItem (id) {
-      this.$router.push(`/recommend/detail/${id}`)
+    getMusicItem (id, type) {
+      this.$router.push(`/recommend/detail/${id}/${type}`)
     }
 
   }
@@ -83,5 +85,23 @@ export default {
   right: 0;
   bottom:0;
 
+}
+.v-enter{
+  transform: translateX(100%);
+}
+.v-enter-to{
+  transform: translateX(0%);
+}
+.v-enter-active{
+transition: transform 1s;
+}
+.v-leave{
+  transform: translateX(0%);
+}
+.v-leave-to{
+  transform: translateX(100%);
+}
+.v-leave-active{
+  transition: transform 1s;
 }
 </style>

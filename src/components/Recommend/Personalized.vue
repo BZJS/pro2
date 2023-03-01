@@ -29,13 +29,18 @@ export default {
       type: String,
       default: '',
       require: true
+    },
+    type: {
+      type: String,
+      default: ''
+
     }
   },
   methods: {
     expandMusic (id) {
       // console.log(id)
-      // this.$emit('select', id)
-      this.$router.push(`/recommend/detail/${id}`)
+      this.$emit('select', id, this.type)
+      // this.$router.push(`/recommend/detail/${id}`)
     }
   }
 
