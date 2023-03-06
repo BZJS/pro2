@@ -3,13 +3,15 @@
   <Header :title="'音乐'"></Header>
     <tab-bar></tab-bar>
     <router-view></router-view>
-    <player-model></player-model>
+   <Player></Player>
+
   </div>
 </template>
 <script>
 import Header from './components/Header.vue'
 import TabBar from '@/components/TabBar.vue'
-import PlayerModel from '@/components/Recommend/Player/PlayerModel.vue'
+import Player from '@/views/Player.vue'
+
 export default {
   name: 'App',
   data: function () {
@@ -23,7 +25,7 @@ export default {
   components: {
     Header,
     TabBar,
-    PlayerModel
+    Player
   }
 
 }
