@@ -57,7 +57,7 @@ export default {
     @include bg_img('../../../assets/images/play');
   }
   .mini-list{
-    //@include bg_img('../../../assets/images/list_163.png');
+
     @include bg_img('../../../assets/images/list');
   }
 }
