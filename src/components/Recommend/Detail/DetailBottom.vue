@@ -2,7 +2,7 @@
 
      <ul>
        <li><img src="../../../assets/images/small_play_163@2x.png" alt="">播放全部</li>
-       <li v-for="value in detailItem" :key="value.userId">
+       <li v-for="value in detailItem" :key="value.userId" @click.stop="showNormal">
          <div class="first">{{value.name}}</div>
          <div class="second">{{value.al.name}} - {{value.ar[0].name}}</div>
        </li>
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+
+import { mapActions } from 'vuex'
 
 export default {
   name: 'DetailBottom',
@@ -23,6 +25,14 @@ export default {
   },
   components: {
 
+  },
+  methods: {
+    ...mapActions([
+      'setNormalState'
+    ]),
+    showNormal () {
+      this.setNormalState(true)
+    }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-<div class="player-normal">
+<div class="player-normal" v-if="this.isShowNormalState">
   <player-header></player-header>
   <player-lyrics></player-lyrics>
   <player-bottom></player-bottom>
@@ -10,12 +10,18 @@
 import PlayerHeader from '@/components/Recommend/Player/PlayerHeader.vue'
 import PlayerLyrics from '@/components/Recommend/Player/PlayerLyrics.vue'
 import PlayerBottom from '@/components/Recommend/Player/PlayerBottom.vue'
+import { mapGetters } from 'vuex'
 export default {
   name: 'PlayerNormal',
   components: {
     PlayerHeader,
     PlayerLyrics,
     PlayerBottom
+  },
+  computed: {
+    ...mapGetters([
+      'isShowNormalState'
+    ])
   }
 }
 </script>

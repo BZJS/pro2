@@ -1,8 +1,8 @@
 <template>
     <div class="player">
       <PlayerNormal></PlayerNormal>
-      <PlayerMini></PlayerMini>
-      <list-player></list-player>
+      <PlayerMini @changeListState="changeListState"></PlayerMini>
+      <list-player ref="listPlayer"></list-player>
     </div>
 </template>
 
@@ -16,6 +16,11 @@ export default {
     PlayerNormal,
     PlayerMini,
     ListPlayer
+  },
+  methods: {
+    changeListState () {
+      this.$refs.listPlayer.hidden()
+    }
   }
 }
 </script>

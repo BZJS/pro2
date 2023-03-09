@@ -1,5 +1,5 @@
 <template>
-    <div class="player-mini">
+    <div class="player-mini" v-if="this.isShowMiniState">
       <div class="mini-logo"><img src="https://p1.music.126.net/2wWMSriSSjCzfbEDa2mfYQ==/109951168388166891.jpg" alt="">
       </div>
       <div class="mini-information">
@@ -10,14 +10,33 @@
 
       </div>
       <div class="mini-star"></div>
-      <div class="mini-list"></div>
+      <div class="mini-list" @click.stop="changeListState"></div>
     </div>
 
 </template>
 
 <script>
+
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'PlayerMini'
+  name: 'PlayerMini',
+  data: function () {
+    return {
+      miniState: false
+    }
+  },
+  methods: {
+    changeListState () {
+      this.$emit('changeListState')
+    }
+
+  },
+  computed: {
+    ...mapGetters([
+      'isShowMiniState'
+    ])
+  }
 }
 </script>
 
