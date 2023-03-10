@@ -2,7 +2,7 @@
 <div class="new-song">
   <div class="new-song-title">推荐音乐</div>
   <div class="new-song-area">
-    <div class="new-song-item" v-for="value in newSongs" :key="value.id">
+    <div class="new-song-item" v-for="value in newSongs" :key="value.id" @click.stop="openNormal">
       <img v-lazy="value.picUrl" alt="">
       <div class="song-name">{{value.name}}</div>
     </div>
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'NewSong',
   data: function () {
@@ -23,6 +25,16 @@ export default {
       type: [],
       default: () => [],
       require: true
+    }
+  },
+  methods: {
+    ...mapActions([
+      'setNormalState',
+      'setMiniState'
+    ]),
+    openNormal () {
+      this.setNormalState(true)
+      this.setMiniState(false)
     }
   }
 

@@ -28,10 +28,12 @@ export default {
   },
   methods: {
     ...mapActions([
-      'setNormalState'
+      'setNormalState',
+      'setMiniState'
     ]),
     showNormal () {
       this.setNormalState(true)
+      this.setMiniState(false)
     }
   }
 }

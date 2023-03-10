@@ -2,7 +2,7 @@
     <div class="player-mini" v-if="this.isShowMiniState">
       <div class="mini-logo"><img src="https://p1.music.126.net/2wWMSriSSjCzfbEDa2mfYQ==/109951168388166891.jpg" alt="">
       </div>
-      <div class="mini-information">
+      <div class="mini-information" @click.stop="openNormal">
         <h2>
           My Stupid Heart (with Lauv)
         </h2>
@@ -17,7 +17,7 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'PlayerMini',
@@ -27,8 +27,16 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'setNormalState',
+      'setMiniState'
+    ]),
     changeListState () {
       this.$emit('changeListState')
+    },
+    openNormal () {
+      this.setNormalState(true)
+      this.setMiniState(false)
     }
 
   },
