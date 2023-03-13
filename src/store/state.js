@@ -1,4 +1,5 @@
 export default {
   miniState: false,
-  normalPlayerState: false
+  normalPlayerState: false,
+  isPlaying: false
 }

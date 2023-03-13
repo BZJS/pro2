@@ -4,5 +4,8 @@ export default {
   },
   isShowNormalState (state) {
     return state.normalPlayerState
+  },
+  isPlaying (state) {
+    return state.isPlaying
   }
 }

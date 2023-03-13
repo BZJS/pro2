@@ -2,7 +2,7 @@
 
       <swiper :options="swiperOption" class="cd">
         <swiper-slide class="song-introduction">
-         <div class="introduction-img">
+         <div class="introduction-img" >
            <img src="https://p1.music.126.net/2wWMSriSSjCzfbEDa2mfYQ==/109951168388166891.jpg" alt="">
          </div>
           <p>一句当前的歌词</p>
@@ -223,6 +223,7 @@ export default {
         border-radius: 50%;
         overflow: hidden;
          margin: 20px auto;
+        animation: strap 3s linear infinite;
         img{
           width: 100%;
           height: 100%;
@@ -246,7 +247,15 @@ export default {
         bottom: 20px;
       }
   }
+  @keyframes strap {
+    from{
+      transform: rotate(0);
+    }
+    to{
+      transform: rotate(360deg);
+    }
 
+  }
 </style>
 <style lang="scss">
 

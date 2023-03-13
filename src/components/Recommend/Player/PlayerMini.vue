@@ -1,23 +1,29 @@
 <template>
-    <div class="player-mini" v-if="this.isShowMiniState">
-      <div class="mini-logo"><img src="https://p1.music.126.net/2wWMSriSSjCzfbEDa2mfYQ==/109951168388166891.jpg" alt="">
-      </div>
-      <div class="mini-information" @click.stop="openNormal">
-        <h2>
-          My Stupid Heart (with Lauv)
-        </h2>
-        <p>Walk off the Earth-Lauv</p>
+    <transition :css="false" @enter="enter" @leave="leave">
+      <div class="player-mini" v-show="this.isShowMiniState">
+        <div class="play-block">
+          <div class="mini-logo"><img src="https://p1.music.126.net/2wWMSriSSjCzfbEDa2mfYQ==/109951168388166891.jpg" alt="">
+          </div>
+          <div class="mini-information" @click.stop="openNormal">
+            <h2>
+              My Stupid Heart (with Lauv)
+            </h2>
+            <p>Walk off the Earth-Lauv</p>
 
+          </div>
+          <div class="mini-star" @click="playing" ref="miniStar" ></div>
+          <div class="mini-list" @click.stop="changeListState"></div>
+        </div>
       </div>
-      <div class="mini-star"></div>
-      <div class="mini-list" @click.stop="changeListState"></div>
-    </div>
 
+    </transition>
 </template>
 
 <script>
 
 import { mapActions, mapGetters } from 'vuex'
+import Velocity from 'velocity-animate'
+import 'velocity-animate/velocity.ui'
 
 export default {
   name: 'PlayerMini',
@@ -26,10 +32,17 @@ export default {
       miniState: false
     }
   },
+  computed: {
+    ...mapGetters([
+      'isShowMiniState',
+      'isPlaying'
+    ])
+  },
   methods: {
     ...mapActions([
       'setNormalState',
-      'setMiniState'
+      'setMiniState',
+      'setIsPlaying'
     ]),
     changeListState () {
       this.$emit('changeListState')
@@ -37,13 +50,31 @@ export default {
     openNormal () {
       this.setNormalState(true)
       this.setMiniState(false)
+    },
+    enter (el, done) {
+      Velocity(el, 'transition.bounceUpIn', { duration: 500 }, function () {
+        done()
+      })
+    },
+    leave (el, done) {
+      Velocity(el, 'transition.bounceUpOut', { duration: 500 }, function () {
+        done()
+      })
+    },
+    playing () {
+      this.setIsPlaying(!this.isPlaying)
     }
 
   },
-  computed: {
-    ...mapGetters([
-      'isShowMiniState'
-    ])
+
+  watch: {
+    isPlaying (newVal, oldVal) {
+      if (newVal) {
+        this.$refs.miniStar.classList.add('active')
+      } else {
+        this.$refs.miniStar.classList.remove('active')
+      }
+    }
   }
 }
 </script>
@@ -56,36 +87,43 @@ export default {
   bottom: 0;
   right: 0;
   left: 0;
-  display: flex;
+
   background-color: pink;
   height: 100px;
   z-index: 99;
   padding: 10px 20px;
-  .mini-logo{
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    img{
-      width: 100%;
-      height: 100%;
+  .play-block{
+    display: flex;
+    .mini-logo{
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .mini-information{
+      flex: 1;
+      padding-left: 10px;
+      color: gray;
+    }
+    .mini-star,.mini-list{
+      width: 80px;
+      height: 80px;
+    }
+    .mini-star{
+      @include bg_img('../../../assets/images/play');
+      &.active{
+        @include bg_img('../../../assets/images/pause');
+      }
+    }
+    .mini-list{
+
+      @include bg_img('../../../assets/images/list');
     }
   }
-  .mini-information{
-    flex: 1;
-    padding-left: 10px;
-    color: gray;
-  }
-  .mini-star,.mini-list{
-    width: 80px;
-    height: 80px;
-  }
-  .mini-star{
-    @include bg_img('../../../assets/images/play');
-  }
-  .mini-list{
 
-    @include bg_img('../../../assets/images/list');
-  }
 }
 </style>

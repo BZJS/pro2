@@ -10,7 +10,7 @@
       <div class="btn-list">
         <div class="mode one"></div>
         <div class="prev"></div>
-        <div class="play"></div>
+        <div class="play" @click.stop="playing" ref="play"></div>
         <div class="next"></div>
         <div class="favorite"></div>
       </div>
@@ -18,8 +18,42 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
-  name: 'PlayerBottom'
+  name: 'PlayerBottom',
+  computed: {
+    ...mapGetters([
+      'isPlaying'
+    ])
+
+  },
+  data: function () {
+    return {
+
+    }
+  },
+  methods: {
+    ...mapActions([
+      'setIsPlaying'
+    ]),
+    playing () {
+      this.setIsPlaying(!this.isPlaying)
+    }
+  },
+  watch: {
+    isPlaying (newVal, oldVal) {
+      if (newVal) {
+        this.$refs.play.classList.add('active')
+      } else {
+        this.$refs.play.classList.remove('active')
+      }
+    }
+  },
+  mounted () {
+    console.log(this.isPlaying)
+  }
+
 }
 </script>
 

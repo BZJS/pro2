@@ -1,24 +1,28 @@
 <template>
-    <div class="list-player" v-if="listState">
+   <transition :css="false" @enter="enter" @leave="leave">
+     <div class="list-player" v-if="listState">
        <div class="list-top">
          <div class="state-left"></div>
          <div class="state-text">顺序播放</div>
          <div class="state-del"></div>
        </div>
-      <div class="list-center">
-        <div class="music-active"></div>
-        <div class="music-text">My music</div>
-        <div class="music-change">
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-      <div class="list-change" @click.stop="hidden">关闭</div>
+       <div class="list-center">
+         <div class="music-active"></div>
+         <div class="music-text">My music</div>
+         <div class="music-change">
+           <span></span>
+           <span></span>
+         </div>
+       </div>
+       <div class="list-change" @click.stop="hidden">关闭</div>
 
-    </div>
+     </div>
+   </transition>
 </template>
 
 <script>
+import Velocity from 'velocity-animate'
+import 'velocity-animate/velocity.ui'
 export default {
   name: 'ListPlayer',
   data: function () {
@@ -29,6 +33,16 @@ export default {
   methods: {
     hidden () {
       this.listState = !this.listState
+    },
+    enter (el, done) {
+      Velocity(el, 'transition.perspectiveUpIn', { duration: 500 }, function () {
+        done()
+      })
+    },
+    leave (el, done) {
+      Velocity(el, 'transition.perspectiveUpOut', { duration: 500 }, function () {
+        done()
+      })
     }
   }
 }
