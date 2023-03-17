@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'Personalized',
   data: function () {
@@ -37,11 +39,22 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'SetSong'
+    ]),
     expandMusic (id) {
       // console.log(id)
       this.$emit('select', id, this.type)
+      this.SetSong({ ids: id })
+      console.log(this.isSongDetail)
+
       // this.$router.push(`/recommend/detail/${id}`)
     }
+  },
+  computed: {
+    ...mapGetters([
+      'isSongDetail'
+    ])
   }
 
 }

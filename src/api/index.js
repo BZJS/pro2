@@ -11,3 +11,5 @@ export const getDetail = (data) => network.get('/playlist/detail', data)
 
 // 最新专辑
 export const getALnum = (data) => network.get('album', data)
+
+export const getSongDetail = (data) => network.get('/song/detail', data)

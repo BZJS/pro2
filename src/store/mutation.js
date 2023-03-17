@@ -1,7 +1,8 @@
 import {
   SET_MINISTATE,
   SET_NORMAL,
-  SET_ISPLAYING
+  SET_ISPLAYING,
+  SET_SONGDETAIL
 
 } from './mutation-type'
 
@@ -14,5 +15,9 @@ export default {
   },
   [SET_ISPLAYING] (state, flag) {
     state.isPlaying = flag
+  },
+  [SET_SONGDETAIL] (state, data) {
+    state.songDetail = data
   }
+
 }

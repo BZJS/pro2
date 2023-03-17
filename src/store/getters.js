@@ -7,5 +7,8 @@ export default {
   },
   isPlaying (state) {
     return state.isPlaying
+  },
+  isSongDetail (state) {
+    return state.songDetail
   }
 }
