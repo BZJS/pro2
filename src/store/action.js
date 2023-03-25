@@ -17,7 +17,25 @@ export default {
     commit(SET_ISPLAYING, flag)
   },
   async SetSong ({ commit }, ids) {
-    var result = await getSongDetail({ ids: ids })
-    commit(SET_SONGDETAIL, result.lrc.lyric)
+    var result = await getSongDetail({ ids: ids.join(',') })
+    const list = []
+
+    result.songs.forEach(function (value) {
+      const obj = {}
+      obj.name = value.name
+      let singer = ''
+      value.ar.forEach(function (item, index) {
+        if (index === 0) {
+          singer = item.name
+        } else {
+          singer += '-' + item.name
+        }
+      })
+      obj.singer = singer
+      obj.picUrl = value.al.picUrl
+      list.push(obj)
+    })
+
+    commit(SET_SONGDETAIL, list)
   }
 }

@@ -45,8 +45,7 @@ export default {
     expandMusic (id) {
       // console.log(id)
       this.$emit('select', id, this.type)
-      this.SetSong({ ids: id })
-      console.log(this.isSongDetail)
+      this.SetSong([id])
 
       // this.$router.push(`/recommend/detail/${id}`)
     }

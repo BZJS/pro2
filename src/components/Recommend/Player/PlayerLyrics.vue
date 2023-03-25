@@ -3,7 +3,7 @@
       <swiper :options="swiperOption" class="cd">
         <swiper-slide class="song-introduction">
          <div class="introduction-img" >
-           <img src="https://p1.music.126.net/2wWMSriSSjCzfbEDa2mfYQ==/109951168388166891.jpg" alt="">
+           <img :src="isCurrentSong.picUrl" alt="">
          </div>
           <p>一句当前的歌词</p>
 
@@ -174,6 +174,7 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import iscrollView from '@/components/iscrollView.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'PlayerLyrics',
@@ -198,8 +199,10 @@ export default {
     swiperSlide,
     iscrollView
   },
-  updated () {
-    // this.$refs.cd.refresh()
+  computed: {
+    ...mapGetters([
+      'isCurrentSong'
+    ])
   }
 }
 </script>

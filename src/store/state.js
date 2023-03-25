@@ -2,5 +2,6 @@ export default {
   miniState: false,
   normalPlayerState: false,
   isPlaying: false,
-  songDetail: {}
+  songDetail: [],
+  currentIndex: 0
 }

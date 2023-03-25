@@ -51,7 +51,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.isPlaying)
+    // console.log(this.isPlaying)
   }
 
 }

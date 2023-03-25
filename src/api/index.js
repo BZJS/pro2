@@ -13,3 +13,5 @@ export const getDetail = (data) => network.get('/playlist/detail', data)
 export const getALnum = (data) => network.get('album', data)
 
 export const getSongDetail = (data) => network.get('/song/detail', data)
+
+export const getLyrics = (data) => network.get('/lyric', data)

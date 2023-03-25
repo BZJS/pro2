@@ -2,8 +2,8 @@
       <div class="player-header">
         <div class="header-logo" @click.stop="changeMini"><img src="../../../assets/images/down_163.png" alt=""></div>
        <div class="header-rigth">
-         <div class="header-top">停驻</div>
-         <div class="header-bottom">黄礼格</div>
+         <div class="header-top">{{isCurrentSong.name}}</div>
+         <div class="header-bottom">{{isCurrentSong.singer}}</div>
        </div>
         <div class="header-null">
 
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'PlayerHeader',
@@ -25,6 +25,11 @@ export default {
       this.setMiniState(true)
       this.setNormalState(false)
     }
+  },
+  computed: {
+    ...mapGetters([
+      'isCurrentSong'
+    ])
   }
 
 }
