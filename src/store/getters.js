@@ -15,11 +15,15 @@ export default {
     const obj = {
       name: '',
       singer: '',
-      picUrl: null
+      picUrl: null,
+      id: ''
     }
     if (state.songDetail.length !== 0) {
       return state.songDetail[state.currentIndex]
     }
     return obj
+  },
+  isLyrics (state) {
+    return state.currentLyrics
   }
 }

@@ -3,5 +3,6 @@ export default {
   normalPlayerState: false,
   isPlaying: false,
   songDetail: [],
-  currentIndex: 0
+  currentIndex: 0,
+  currentLyrics: {}
 }

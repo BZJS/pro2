@@ -14,7 +14,7 @@ import PlayerLyrics from '@/components/Recommend/Player/PlayerLyrics.vue'
 import PlayerBottom from '@/components/Recommend/Player/PlayerBottom.vue'
 import Velocity from 'velocity-animate'
 import 'velocity-animate/velocity.ui'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'PlayerNormal',
   components: {
@@ -24,7 +24,9 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'isShowNormalState'
+      'isShowNormalState',
+      'isCurrentSong',
+      'isLyrics'
     ])
   },
   methods: {
@@ -37,8 +39,17 @@ export default {
       Velocity(el, 'transition.shrinkOut', { duration: 500 }, function () {
         done()
       })
-    }
+    },
+    ...mapActions([
+      'setLyrics'
+    ])
 
+  },
+  watch: {
+    // 更改数据不用是点击触发，可以是监控某个状态的变化知道可以进行请求数据改变歌词了
+    isCurrentSong (newValue, oldValue) {
+      this.setLyrics(newValue.id)
+    }
   }
 }
 </script>

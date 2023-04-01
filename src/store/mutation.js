@@ -2,7 +2,8 @@ import {
   SET_MINISTATE,
   SET_NORMAL,
   SET_ISPLAYING,
-  SET_SONGDETAIL
+  SET_SONGDETAIL,
+  SET_LYRICS
 
 } from './mutation-type'
 
@@ -18,6 +19,9 @@ export default {
   },
   [SET_SONGDETAIL] (state, data) {
     state.songDetail = data
+  },
+  [SET_LYRICS] (state, data) {
+    state.currentLyrics = data
   }
 
 }

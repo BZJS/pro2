@@ -6,9 +6,9 @@
           </div>
           <div class="mini-information" @click.stop="openNormal">
             <h2>
-              My Stupid Heart (with Lauv)
+              {{isCurrentSong.name}}
             </h2>
-            <p>Walk off the Earth-Lauv</p>
+            <p>{{isCurrentSong.singer}}</p>
 
           </div>
           <div class="mini-star" @click="playing" ref="miniStar" ></div>
@@ -35,7 +35,8 @@ export default {
   computed: {
     ...mapGetters([
       'isShowMiniState',
-      'isPlaying'
+      'isPlaying',
+      'isCurrentSong'
     ])
   },
   methods: {

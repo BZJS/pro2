@@ -4,3 +4,5 @@ export const SET_NORMAL = 'SET_NORMAL'
 export const SET_ISPLAYING = 'SET_ISPLAYING'
 
 export const SET_SONGDETAIL = 'SET_SONGDETAIL'
+
+export const SET_LYRICS = 'SET_LYRICS'
